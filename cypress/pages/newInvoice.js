@@ -24,7 +24,7 @@ class Lists {
     inputPurple = () => cy.get('[data-test="invoice_color-purple"]');
 
 
-    inputUploadLogo = () => cy.get('[data-test="file_upload_button"]');
+    inputUploadLogo = () => cy.get('[data-test="file_upload-logo"]').find('input');
     inputUploadStamp = () => cy.get('[data-test="file_upload_button"]');
     radioModernInvoice = () => cy.get('[data-test="invoice_appearance_modern"]');
     radioSimpleInvoice = () => cy.get('[data-test="invoice_appearance_simple"]');
@@ -62,7 +62,7 @@ class Lists {
     buttonSave = () => cy.get('[data-test="save_invoice"]');
     buttonSaveInvoices = () => cy.get('[data-test="save_download_invoice"]');
 
-
+    buttonReports = () => cy.get('.navbar-navigation__link--reports');
 
 
 
