@@ -7,13 +7,10 @@ import General from "../library/general_lib";
 
 
 describe('Invoices', () => {
-    //sem pride session aby stranka ostala prihlasena
-    before(() => {
-        General.login()
-    })
-    beforeEach(() => {
+    beforeEach( () => {
+    cy.session('Log to page', () => General.login())
         General.visitPage('https://cy.fakturaonline.cz/faktura');
-    })
+    });
 
 
 
@@ -36,7 +33,7 @@ describe('Invoices', () => {
     });
 
 
-    it.only('2.upload Logo file', () => {
+    it('2.upload Logo file', () => {
         Lists.buttonInvoiceKind().click().wait(500);
         Lists.inputInvoiceVAT().click().wait(500);
         Lists.inputInvoiceNr().type(General.generateRandomNr()).should('be.visible');
@@ -53,22 +50,23 @@ describe('Invoices', () => {
 
     });
 
-    it('4.test', () => {
+    it.only('4.Ceknem download', () => {
+
+        Lists.buttonSaveInvoices().click().wait(500);
+        General.verifyDownload();
 
     });
 
-    it('5.test', () => {
 
-    });
-
-    it('6.test', () => {
-
-    });
-
-    it('7.test', () => {
-
-    });
 
 
 });
+
+
+
+
+
+
+
+
 

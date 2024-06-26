@@ -3,8 +3,6 @@ import Login from "../pages/login"
 import Lists from "../pages/newInvoice";
 
 
-
-
 class General {
     login(username, password) {                         //nazov funkcie
         cy.clearCookies();
@@ -16,7 +14,6 @@ class General {
         Login.buttonClickTry().click().wait(500);
         cy.url().should('include', '/faktura');
         Login.buttonMyAccount().should('be.visible');
-
     }
     generateEmail() {
         const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -30,7 +27,7 @@ class General {
     generateRandomNr() {
         const chars = '1234567890';
         let word = '';
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 5; i++) {
             word += chars.charAt(Math.floor(Math.random() * chars.length));
         };
         return word;
@@ -39,13 +36,17 @@ class General {
     generateRandomWord() {
         const abc = 'abcdefghijklmnopqrstuvwxyz';
         let string = '';
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 5; i++) {
             string += abc.charAt(Math.floor(Math.random() * abc.length));
         };
         return string;
     }
     visitPage(url) {
         cy.visit(url);
+    }
+
+    verifyDownload() {
+        cy.verifyDownload('.pdf', { contains: true ,  timeout: 25000 });
     }
 }
 
