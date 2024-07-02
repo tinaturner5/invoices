@@ -1,6 +1,6 @@
 import Login from "../pages/login"
 
-import Lists from "../pages/newInvoice";
+import NewInvoice from "../pages/newInvoice";
 
 
 class General {
@@ -16,6 +16,7 @@ class General {
         Login.buttonMyAccount().should('be.visible');
     }
     generateEmail() {
+        cy.step('generating an email that has 20characters, numbers and letters and ends with @gmail.com')
         const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
         let email = '';
         for (let i = 0; i < 20; i++) {
@@ -25,6 +26,7 @@ class General {
         return email;
     }
     generateRandomNr() {
+        cy.step('generating a random number')
         const chars = '1234567890';
         let word = '';
         for (let i = 0; i < 5; i++) {
@@ -34,6 +36,7 @@ class General {
     }
 
     generateRandomWord() {
+        cy.step('generating a random word')
         const abc = 'abcdefghijklmnopqrstuvwxyz';
         let string = '';
         for (let i = 0; i < 5; i++) {
@@ -46,8 +49,23 @@ class General {
     }
 
     verifyDownload() {
+        cy.step('Download and verify of succesfull download of .pdf')
         cy.verifyDownload('.pdf', { contains: true ,  timeout: 25000 });
     }
+
+    createStep(step) {
+        cy.step(step)
+    }
+
+    createIntercept(method, url) {
+       return cy.intercept(method, url);                //need to return so i can use in alias.as
+    }
+
+    createSession(sessionId, setupFnc) {
+        cy.session(sessionId, setupFnc);
+    }
+
+
 }
 
 
