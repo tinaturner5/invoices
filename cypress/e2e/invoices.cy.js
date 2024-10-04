@@ -52,7 +52,7 @@ describe('Invoices', () => {
 
     it('4.Ceknem download', () => {
 
-        NewInvoice.buttonSaveInvoices().click().wait(500);
+        NewInvoice.buttonSaveDownloadInvoices().click().wait(500);
         General.verifyDownload();
 
     });

@@ -1,5 +1,5 @@
 class NewInvoice {
-    buttonExistingInvoices = () => cy.get('.navbar-navigation__link--my_invoices');
+    buttonExistingInvoices = () => cy.contains('button', "Faktury");    //html element button, unikatnost selectoru je v nazve
     buttonCreateInvoice = () => cy.get('[data-test="create-invoice-button"]');
     buttonInvoiceKind = () => cy.get('[data-test="invoice_kind"]');
     inputInvoiceVAT = () => cy.get('[data-test="vat_invoice_kind_option"]');
@@ -63,21 +63,29 @@ class NewInvoice {
     inputUnitTypeOption = (option) => cy.contains('[data-test="unit_type_option"]', option);
     inputItemDescription = () => cy.get('[data-test="item-description"]');
     inputItemPrice = () => cy.get('[data-test="invoice_item_price"]');
+    inputRecipientMail = () => cy.get('[data-test="recipient_email"]');
+    ButtonSendMail = () => cy.get('[data-test="submit_form"]');
 
 
     buttonPreView = () => cy.get('[data-test="preview_invoice"]');
     buttonCreateSend = () => cy.get('[data-test="show_submit_dialog"]');
-    buttonSave = () => cy.get('[data-test="save_invoice"]');
-    buttonSaveInvoices = () => cy.get('[data-test="save_download_invoice"]');
+    buttonSaveInvoice = () => cy.get('[data-test="save_invoice"]');
+    buttonSaveDownloadInvoices = () => cy.get('[data-test="save_download_invoice"]');
+    buttonDuplicateInvoice = () => cy.get('[data-test="duplicate_invoice"]');
+    buttonSaveSend = () => cy.get('[data-test="show_submit_dialog"]');
 
     buttonReports = () => cy.get('.navbar-navigation__link--reports');
 
-    buttonContacts = () => cy.get('.navbar-navigation__link--contact');
+    buttonContacts = () => cy.contains('button',"Kontakty");
     buttonAddContact = () => cy.get('[data-test="add-contact-button"]');
     inputCompanyName = () => cy.get('[data-test="invoice_attributes_name"]');
     buttonSaveNewContact = () => cy.get('[data-test="save-contact"]');
+    companyListItem = (companyName) => cy.contains('li', companyName);  //unordered list ul a sklada sa z list item li
     buttonNewInvoiceInContactProfile = () => cy.get('[data-test="new-invoice"]');
     buttonSaveAndSend = () => cy.get('[data-test="show_submit_dialog"]');
+    buttonDeleteContact = () => cy.get('[data-test="delete_contact"]');
+    buttonDeleteContactInTable = (firmName) => cy.contains('.el-table__row', firmName).find('[data-test="delete_contact"]');
+
 
     inputRecipientEmail = () => cy.get('[data-test="recipient_email"]');
     buttonSentEmail = () => cy.get('[data-test="submit_form"]');

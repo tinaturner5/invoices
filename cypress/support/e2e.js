@@ -21,3 +21,5 @@ require('cy-verify-downloads').addCustomCommand();
 // require('./commands')
 
 import 'cypress-plugin-steps'
+
+import '@percy/cypress';
