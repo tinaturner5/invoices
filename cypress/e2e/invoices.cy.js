@@ -1,4 +1,4 @@
-import Lists from '../pages/newInvoice';
+import NewInvoice from '../pages/newInvoice';
 
 import Login from "../pages/login";
 
@@ -15,44 +15,44 @@ describe('Invoices', () => {
 
 
     it('1.test-fill in the fields only partially, use a word instead in bank account', () => {
-        Lists.buttonInvoiceKind().click().wait(500);
-        Lists.inputInvoiceVAT().click().wait(500);
-        Lists.inputInvoiceNr().type(General.generateRandomNr()).should('be.visible');
-        Lists.inputInvoiceRegNr().type(General.generateRandomNr()).should('be.visible');
-        Lists.inputInvIssuedBy().type(General.generateRandomWord()).should('be.visible');
-        Lists.inputDueDate().click({force:true}).wait(500);
-        Lists.invDueDateSelect('14 dnů').click({force:true}); //how to choose 14days from dropdown menu?
-        Lists.inputBankAccount().type(General.generateRandomWord()).should('be.visible');
-        Lists.inputCurrency().click().wait(500);
-        Lists.InputCurrencyCZK().click().wait(500);
-        Lists.inputPrice().type(General.generateRandomWord()).should('be.visible');
+        NewInvoice.buttonInvoiceKind().click().wait(500);
+        NewInvoice.inputInvoiceVAT().click().wait(500);
+        NewInvoice.inputInvoiceNr().type(General.generateRandomNr()).should('be.visible');
+        NewInvoice.inputInvoiceRegNr().type(General.generateRandomNr()).should('be.visible');
+        NewInvoice.inputInvIssuedBy().type(General.generateRandomWord()).should('be.visible');
+        NewInvoice.inputDueDate().click({force:true}).wait(500);
+        NewInvoice.invDueDateSelect('14 dnů').click({force:true}); //how to choose 14days from dropdown menu?
+        NewInvoice.inputBankAccount().type(General.generateRandomWord()).should('be.visible');
+        NewInvoice.inputCurrency().click().wait(500);
+        NewInvoice.InputCurrencyCZK().click().wait(500);
+        NewInvoice.inputPrice().type(General.generateRandomWord()).should('be.visible');
         cy.intercept('POST', /api\/invoices.pdf/).as('previewPDF');       //intercept caka kym si zavolam tuto stranku
-        Lists.buttonPreView().click().wait('@previewPDF');                            //cy.origin sa nepouziva, nechcem mat automatizovane testy v inom okne
+        NewInvoice.buttonPreView().click().wait('@previewPDF');                            //cy.origin sa nepouziva, nechcem mat automatizovane testy v inom okne
         //ako overim ze mi otvorilo novy tab a je tam FA? - neoverujem ze sa mi nieco ZOBRAZILO, ale overujem ze to kliklo, tj pouzijem intercept vyssie
 
     });
 
 
     it('2.upload Logo file', () => {
-        Lists.buttonInvoiceKind().click().wait(500);
-        Lists.inputInvoiceVAT().click().wait(500);
-        Lists.inputInvoiceNr().type(General.generateRandomNr()).should('be.visible');
-        Lists.inputInvoiceRegNr().type(General.generateRandomNr()).should('be.visible');
-        Lists.inputInvIssuedBy().type(General.generateRandomWord()).should('be.visible');
+        NewInvoice.buttonInvoiceKind().click().wait(500);
+        NewInvoice.inputInvoiceVAT().click().wait(500);
+        NewInvoice.inputInvoiceNr().type(General.generateRandomNr()).should('be.visible');
+        NewInvoice.inputInvoiceRegNr().type(General.generateRandomNr()).should('be.visible');
+        NewInvoice.inputInvIssuedBy().type(General.generateRandomWord()).should('be.visible');
         cy.intercept('POST', /faktura/).as('uploadLogo');
-        Lists.inputUploadLogo().selectFile('cypress/support/images/product_4827608.jpg',{force:true}).wait('@uploadLogo');   //tu chcem uploadnut logo ale netusim ako
+        NewInvoice.inputUploadLogo().selectFile('cypress/support/images/product_4827608.jpg',{force:true}).wait('@uploadLogo');   //tu chcem uploadnut logo ale netusim ako
 
     });
 
     it('3.Ceknem ci sa mi otvoria reporty na networkovej urovni', () => {
         cy.intercept('GET', /api\/invoices\/faktura/).as('viewReport');     //intercept je spion, ktoreho spustim pred klikom a sledujem ci sa to spojilo s tym konkretnym API
-        Lists.buttonReports().click().wait('@viewReport');
+        NewInvoice.buttonReports().click().wait('@viewReport');
 
     });
 
-    it.only('4.Ceknem download', () => {
+    it('4.Ceknem download', () => {
 
-        Lists.buttonSaveInvoices().click().wait(500);
+        NewInvoice.buttonSaveDownloadInvoices().click().wait(500);
         General.verifyDownload();
 
     });
